@@ -22,7 +22,6 @@ db_object = client[MONGO_DB_NAME]
 
 collection_obj = db_object['nodeDB']
 
-
 def setup_global_env():
 
     print('Setting up global variables and env variables')

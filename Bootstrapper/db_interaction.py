@@ -32,6 +32,15 @@ def getAppData(app_id, service_name):
 
     return appData, (appData != None)
 
+
+def getPlatformData(service_name):
+
+    collection = getCollection()
+    platformData = collection.find_one({"app_name": 'platform', "service_name":service_name})
+
+    return platformData, (platformData != None)
+
+
 def setAppdata(app_id, app_name, service_name, acr_img_path, port):
     print(f'Storing ACR-image info into db for app[{app_name}] service[{service_name}]')
     log.log_message('DEBUG', f'Storing ACR info into db for app[{app_name}] service[{service_name}]')

@@ -39,4 +39,5 @@ def add_service_info(service_info_entry):
         print(f'Storing Info into service registry failed for platform service[{service_info_entry["service_name"]}]')
         logger.log_message('ERROR', f'Storing Info into service registry failed for platform service[{service_info_entry["service_name"]}]')
 
+    print('returning')
     return insert_status

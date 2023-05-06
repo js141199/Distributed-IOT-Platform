@@ -126,7 +126,7 @@ def initiating_deployer_process(scheduler_request):
 
             acr_image_path, contanarized_app_port = None, None
 
-            if image_status == True:
+            if image_status == False:
                 # build the image store to ACR, and get image_path and app_port
                 acr_image_path, contanarized_app_port = image_builder.build_and_store_image(app_id, app_name, service_name)
             

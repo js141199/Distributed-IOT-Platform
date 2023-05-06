@@ -1,5 +1,5 @@
 import node_info 
-
+import os
 
 acr_info = {
     "login_server" : "testimages01.azurecr.io", 
@@ -8,6 +8,19 @@ acr_info = {
 }
 
 platform_services = {
+
+    "platform-ui" : {
+        "port" : 8005,
+        "node_info" : node_info.node_1
+    },
+    "platform-backend" : {
+        "port" : 8011,
+        "node_info" : node_info.node_1
+    },
+    "deployer" : {
+        "port" : 8006,
+        "node_info" : node_info.node_1
+    },
     "logger" : {
         "port" : 8002,
         "node_info" : node_info.node_1
@@ -23,11 +36,6 @@ platform_services = {
     },
     "load-balancer" : {
         "port" : 8005,
-        "node_info" : node_info.node_1
-
-    },
-    "deployer" : {
-        "port" : 8006,
         "node_info" : node_info.node_1
 
     },
@@ -47,7 +55,9 @@ platform_services = {
         "port" : 8010,
         "node_info": node_info.node_1
     }
+
 }
 
-
-
+def setup_ssh(nodes):
+    for node in nodes:
+        os.system(f"ssh-keyscan -H {node['ip']} >> ~/.ssh/known_hosts")
