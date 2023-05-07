@@ -46,6 +46,8 @@ def run_docker_image(acr_info, node_info, contanarized_app_port, acr_image_path,
     commands.append("exit")
 
     command = ';'.join(commands)
+
+    os.system(f"ssh-keyscan -H {node_info['ip']} >> ~/.ssh/known_hosts")
     
     # execute the commands on azure VM power-shell
     os.system(f"sshpass -p {node_info['password']} ssh {node_info['user_name']}@{node_info['ip']} '" + command + "'")
@@ -59,10 +61,12 @@ def run_docker_image(acr_info, node_info, contanarized_app_port, acr_image_path,
     if container_status == 'running':
         print(f"container_status => {container_status}")
         print(f"Deployment done successfully for app[{app_name}] service[{service_name}]")
+        # get the container id of the container 
+        container_id = os.popen(f"sshpass -p {node_info['password']} ssh {node_info['user_name']}@{node_info['ip']} " +  "'docker container ls --quiet --filter name=^" + container_name  + "$;exit'", 'r', 1).read()
         log.log_message('DEBUG', f"Deployment done successfully container_status[{container_status}] for app[{app_name}] service[{service_name}]")
-        return True, container_name
+        return True, container_name, container_id
 
     print(f"Service not deployed for app[{app_name}] service[{service_name}]!! Some error in the code!!")
     log.log_message('DEBUG', f"Service not deployed for app{app_name} service[{service_name}]")
 
-    return False, None
+    return False, None, None

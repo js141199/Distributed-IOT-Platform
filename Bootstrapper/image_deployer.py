@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 import logger as logger
+import time
 
 def run_docker_image(acr_info, service_info, contanarized_app_port, acr_image_path, service_name):
 
@@ -53,7 +54,11 @@ def run_docker_image(acr_info, service_info, contanarized_app_port, acr_image_pa
 
     command = ';'.join(commands)
 
+    os.system(f"ssh-keyscan -H {node_info['ip']} >> ~/.ssh/known_hosts")
+
     os.system(f"sshpass -p {node_info['password']} ssh {node_info['user_name']}@{node_info['ip']} '" + command + "'")
+
+    time.sleep(1)
 
     # check that is container really running
     # is these code running properly? Do stress testing
@@ -64,10 +69,11 @@ def run_docker_image(acr_info, service_info, contanarized_app_port, acr_image_pa
     if container_status == 'running':
         print(f"container_status => {container_status}")
         print(f"Deployment done successfully for platform service[{service_name}]")
+        container_id = os.popen(f"sshpass -p {node_info['password']} ssh {node_info['user_name']}@{node_info['ip']} " +  "'docker container ls --quiet --filter name=^" + container_name  + "$;exit'", 'r', 1).read()
         logger.log_message('DEBUG', f"Deployment done successfully container_status[{container_status}] for platform service[{service_name}]")
-        return True, container_name, container_up_time
+        return True, container_name, container_up_time, container_id
 
     print(f"Service not deployed for platform service[{service_name}]!! Some error in the code!!")
     logger.log_message('DEBUG', f"Service not deployed for platform service[{service_name}]")
 
-    return False, None, None
+    return False, None, None, None

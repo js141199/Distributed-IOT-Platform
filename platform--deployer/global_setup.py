@@ -20,12 +20,11 @@ entry = {
 # Creating a new database if not found
 db_object = client[MONGO_DB_NAME]
 
-collection_obj = db_object['nodeDB']
+node_db = db_object['nodeDB']
 
 def setup_global_env():
 
     print('Setting up global variables and env variables')
-    logger.log_message('DEBUG', 'Setting up global variables and env variables')
 
     # set-up global variables by fetching it from env
     global_variables.node_name = os.getenv('node_name')
@@ -33,7 +32,7 @@ def setup_global_env():
     global_variables.CONTAINER_UP_TIME = os.getenv('container_up_time')
 
     # get node info from node-db
-    global_variables.node_info = collection_obj.find_one({'node_name' : global_variables.node_name})
+    global_variables.node_info = node_db.find_one({'node_name' : global_variables.node_name})
 
     if global_variables.node_info == None:
         print(f'Node info not found into nodeDB for node[{global_variables.node_name}]')

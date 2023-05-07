@@ -46,3 +46,6 @@ sudo usermod -aG docker $USER
 newgrp docker
 
 # add code for adding platform-deployer/services/ folder
+mkdir platform-deployer
+cd platform-deployer
+mkdir services

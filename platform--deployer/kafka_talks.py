@@ -1,12 +1,11 @@
 from kafkaHandler import Producer, Consumer
+import global_variables, kafka_info
 
-kafkaIp = "20.2.81.4"
-kafkaPortNo = "19092"
+kafkaIp = kafka_info.get_kafka_info()['ip']
+kafkaPortNo = str(kafka_info.get_kafka_info()['port'])
 
 def send_using_kafka(topic,message):
-    # producer = KafkaProducer(bootstrap_servers=[kafkaIp+":"+kafkaPortNo],api_version=(0, 10, 1))
-    # producer.send(topic, json.dumps(message).encode('utf-8'))
-
+   
     # waiting for kafka-server to start
 
     producer = Producer(bootstrap_servers=[kafkaIp+":"+kafkaPortNo])
@@ -15,15 +14,6 @@ def send_using_kafka(topic,message):
 
 
 def receive_using_kafka(topic):
-
-    # consumer = KafkaConsumer(topic, bootstrap_servers=[kafkaIp+":"+kafkaPortNo], auto_offset_reset='earliest', group_id="consumer-group-a")
-    # for message in consumer:
-    #     print(message.value.decode('utf-8'))
-
-    # reply = next(consumer)
-    # message = reply.value.decode('utf-8')
-    # message = json.loads(message)
-    # return message
 
     # waiting for kafka-server to start
 

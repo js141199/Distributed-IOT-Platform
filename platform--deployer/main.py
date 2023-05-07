@@ -83,10 +83,10 @@ def initiating_deployer_process(scheduler_request):
 
             if image_status == True:
 
-                contanarized_app_port = app_data.port
-                acr_image_path = app_data.acr_img_path
+                contanarized_app_port = app_data['port']
+                acr_image_path = app_data['acr_img_path']
 
-                deployment_status, container_name = image_deployer.run_docker_image(global_variables.acr_info, node_info, contanarized_app_port, acr_image_path, app_name, service_name)
+                deployment_status, container_name, container_id = image_deployer.run_docker_image(global_variables.acr_info, node_info, contanarized_app_port, acr_image_path, app_name, service_name)
 
                 if deployment_status == True:
                     # send success message to node-manager => jeet
@@ -99,7 +99,8 @@ def initiating_deployer_process(scheduler_request):
                         "container_up_time": datetime.now().strftime("%d-%m-%Y-%H-%M-%S-%f"),
                         "container_name": container_name,
                         "node_name": node_info["node_name"],
-                        "ip": node_info["ip"]
+                        "ip": node_info["ip"],
+                        "container_id": container_id
                     }
 
                     print(f"sending response to node-manager : \n{success_msg_node_manager}")
@@ -124,6 +125,8 @@ def initiating_deployer_process(scheduler_request):
             # first check that is image already built for the given app and service
             app_data, image_status = getAppData(app_id, service_name)
 
+            print(f'app-data:  {app_data} image_status: {image_status}')
+
             acr_image_path, contanarized_app_port = None, None
 
             if image_status == False:
@@ -131,7 +134,7 @@ def initiating_deployer_process(scheduler_request):
                 acr_image_path, contanarized_app_port = image_builder.build_and_store_image(app_id, app_name, service_name)
             
             else:
-                acr_image_path, contanarized_app_port = app_data.acr_img_path, app_data.port
+                acr_image_path, contanarized_app_port = app_data['acr_img_path'], app_data['port']
             
             if acr_image_path != None and contanarized_app_port != None:
                 
@@ -159,7 +162,7 @@ def initiating_deployer_process(scheduler_request):
                 '''
                 print(f"Reply from load-balancer = {node_info}")
 
-                deployment_status, container_name = image_deployer.run_docker_image(global_variables.acr_info, node_info, contanarized_app_port, acr_image_path, app_name, service_name)
+                deployment_status, container_name, container_id  = image_deployer.run_docker_image(global_variables.acr_info, node_info, contanarized_app_port, acr_image_path, app_name, service_name)
 
                 if deployment_status == True:
                     # send success message to node-manager => jeet
@@ -172,7 +175,8 @@ def initiating_deployer_process(scheduler_request):
                         "container_up_time": datetime.now().strftime("%d-%m-%Y-%H-%M-%S-%f"),
                         "container_name": container_name,
                         "node_name": node_info["node_name"],
-                        "ip": node_info["ip"]
+                        "ip": node_info["ip"],
+                        "container_id": container_id
                     }
 
                     print(f"sending response to node-manager : \n{success_msg_node_manager}")

@@ -11,25 +11,27 @@ from datetime import datetime
 import logger as logger
 import service_registry
 import node_setup
+import config_info as config_info
 
+
+service_registry.delete_entries()
+
+# do call function for redpanda-server start
+kafka.start_kafka_server(node_info.node_1)
 
 platform_services = platform_info.platform_services
 
 # register our terminal to access other node terminals using ssh
-platform_services.setup_ssh(node_info.node_list)
+platform_info.setup_ssh(node_info.node_list)
 
-print(f'platform-services : {platform_services}')
+# insert nodes into the db
+node_setup.insert_nodes(node_info.node_list)
 
-# node = {
-#     'ip' : '20.163.50.237',
-#     'user_name': 'Meet',
-#     'password' : 'Meet@12345678'
-# }
+# insert config details into the db
+node_setup.insert_config_details(config_info.platform_config)
 
-# node_setup.setup_node_env(node_info.node_list)
-
-# do call function for redpanda-server start
-# kafka.start_kafka_server(node_info.node_1)
+# do env setup on each node
+#node_setup.setup_node_env(node_info.node_list)
 
 global_variables.CONTAINER_UP_TIME = datetime.now().strftime("%d-%m-%Y-%H-%M-%S-%f")
 
@@ -43,18 +45,15 @@ service_entry = {
         "container_up_time": global_variables.CONTAINER_UP_TIME,
         "container_name": '',
         "node_name": '',
-        "ip": ''
+        "ip": '',
+        "container_id": ''
 }
-
-service_registry.delete_entries()
 
 insert_status = service_registry.add_service_info(service_entry)               
 
-# print(platform_services)
-
 for service_name, service_info in platform_services.items():
 
-    if service_name not in ['sensor-manager', 'platform-ui', 'platform-backend', 'validator-workflow', 'api-gateway']:
+    if service_name in ['deployer']:
 
         print(service_name)
 
@@ -99,10 +98,10 @@ for service_name, service_info in platform_services.items():
                 continue
         else:
             # get info from db
-            acr_image_path, contanarized_app_port, platform_id = platform_data.acr_img_path, platform_data.port, platform_data.app_id
+            acr_image_path, contanarized_app_port, platform_id = platform_data['acr_img_path'], platform_data['port'], platform_data['app_id']
 
         # run the image on docker container
-        deployment_status, container_name, container_up_time = image_deployer.run_docker_image(platform_info.acr_info, service_info, contanarized_app_port ,acr_image_path, service_name)
+        deployment_status, container_name, container_up_time, container_id = image_deployer.run_docker_image(platform_info.acr_info, service_info, contanarized_app_port ,acr_image_path, service_name)
 
         if deployment_status == True:
 
@@ -122,7 +121,8 @@ for service_name, service_info in platform_services.items():
                 "container_up_time": container_up_time,
                 "container_name": container_name,
                 "node_name": service_info['node_info']['node_name'],
-                "ip": service_info['node_info']['ip']
+                "ip": service_info['node_info']['ip'],
+                "container_id": container_id
             }
             insert_status = service_registry.add_service_info(service_entry)                
             

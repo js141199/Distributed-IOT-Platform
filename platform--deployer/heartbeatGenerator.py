@@ -13,22 +13,12 @@ import time
 from kafka_talks import send_using_kafka
 
 
-# All variable declaration.
-# kafkaIp = "20.2.81.4"
-# kafkaPortNo = "19092"
-
-
-
 def sendheartBeat(kafkaTopicName, containerName, node_name) : 
-    
-    # producer = KafkaProducer(bootstrap_servers=[kafkaIp+":"+kafkaPortNo],api_version=(0, 10, 1))
-    
+
     heartbeat = {
         "container_name" : containerName,
         "node_name" : node_name,
     }
-
-    # i = 1
 
     while True:
         try:

@@ -11,4 +11,7 @@ acr_info["login_server"] = "testimages01.azurecr.io"
 
 CONTAINER_UP_TIME = None
 
+KAFKA_IP = None
+KAFKA_PORT = None
 
+producerForLogging = None

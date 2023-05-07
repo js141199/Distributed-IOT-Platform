@@ -16,7 +16,6 @@ log_entry = {
         "severity": messageContents[0],
         "message": messageContents[1]
     }
-
 '''
 
 # send the logging message on log-deployer topic to logger service
