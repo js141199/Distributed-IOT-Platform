@@ -2,10 +2,16 @@ from kafka import KafkaProducer
 from datetime import datetime
 import json
 import global_variables
+import kafka_info
 
-kafkaIp = "20.2.81.4"
-kafkaPortNo = "19092"
+
+MONGO_SERVER_URL = 'mongodb+srv://pranshu_mongo:iasproject@cluster0.svcqjdj.mongodb.net/?retryWrites=true&w=majority'
+MONGO_DB_NAME = "IAS_test_1"
+
+kafkaIp = kafka_info.get_kafka_info()['ip']
+kafkaPortNo = str(kafka_info.get_kafka_info()['port'])
 producerForLogging = KafkaProducer(bootstrap_servers = [kafkaIp+":"+kafkaPortNo], api_version=(0, 10, 1))
+
 
 '''
 log_entry = {
@@ -16,7 +22,6 @@ log_entry = {
         "severity": messageContents[0],
         "message": messageContents[1]
     }
-
 '''
 
 # send the logging message on log-deployer topic to logger service
