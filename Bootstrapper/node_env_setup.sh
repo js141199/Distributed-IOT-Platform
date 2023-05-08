@@ -9,6 +9,14 @@ sudo apt-get update
 # install package for ssh connection
 sudo apt-get install sshpass
 
+sudo pip install azure-storage-blob
+
+sudo pip install python-dotenv
+
+sudo pip install python-kafka
+
+sudo pip install pymongo
+
 # adding the fingerprint of out host IP to the remote network of VM	
 # ssh-keyscan -H 20.193.154.7 >> ~/.ssh/known_hosts
 
