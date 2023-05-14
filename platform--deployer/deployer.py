@@ -144,7 +144,8 @@ def serve_build_and_run_request(app_id, app_name, service_name):
                 "node_name" : "",
                 "user_name" : "",
                 "password" : "",
-                "ip" : ""
+                "ip" : "",
+                "port": ""
             }
         '''
         print(f"Reply from load-balancer = {node_info}")

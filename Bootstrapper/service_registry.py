@@ -7,13 +7,14 @@ MONGO_DB_NAME = 'IAS_test_1'
 client = pymongo.MongoClient(MONGO_SERVER_URL)
 
 '''
-entry = {
+service_info_entry = {
   "app_name" : "",
   "service_name": "",
   "app_id": "",
   "port": "",
   "container_up_time": "",
-  "container_name": ""
+  "container_name": "",
+  "container_id": "",
   "node_name": "",
   "ip": ""
 }

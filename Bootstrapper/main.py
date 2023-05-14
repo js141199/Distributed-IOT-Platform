@@ -31,7 +31,7 @@ node_setup.insert_nodes(node_info.node_list)
 node_setup.insert_config_details(config_info.platform_config)
 
 # do env setup on each node
-#node_setup.setup_node_env(node_info.node_list)
+node_setup.setup_node_env(node_info.node_list)
 
 global_variables.CONTAINER_UP_TIME = datetime.now().strftime("%d-%m-%Y-%H-%M-%S-%f")
 

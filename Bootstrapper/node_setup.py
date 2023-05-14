@@ -40,6 +40,16 @@ def delete_config_entries():
     
     collection.delete_many({})
 
+'''
+node_info = {
+    "user_name": "",
+    "ip": "",
+    "password": "",
+    "node_name": "",
+    "status": "active/inactive"
+}
+'''
+
 def insert_nodes(nodes):
 
     # first clear all the previous entries from nodeDB collection
