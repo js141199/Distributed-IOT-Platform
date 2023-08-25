@@ -36,7 +36,7 @@
 
 ### Platform Architecture
 
-![Platform Architecture](https://github.com/js141199/IOT-Platform/blob/main/Diagrams/Platform-Architechture.pdf)  
+![Platform Architecture](https://github.com/js141199/IOT-Platform/blob/main/Diagrams/Platform-Architecture.png)  
 
 
 ### Other Diagrams
