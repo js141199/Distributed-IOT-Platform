@@ -2,7 +2,10 @@
 
 
 ## Overview of platform
-1. 
+1. Distributed IOT platform is a Platform as a Service(PaaS) project which allows developers to deploy, scale, monitor and execute their IOT based applications.
+2. In our project IOT devices can be integrated and used for deployment of IOT based applications.
+3. Developer's app can be deployed on multiple containers based on scalability requirements of the developer, our platform also supports load balancing across multiple VM instances.
+4. In our IoT platform, we offer comprehensive support for monitoring and fault tolerance. This means that if any instance of a subsystem goes offline, the system promptly orchestrates the deployment of a new instance for that subsystem, ensuring uninterrupted operation.
 
 
 ### Actors of platform
