@@ -18,7 +18,7 @@
 ## Detailed information about the platform
 
 ### Tech Stack 
-1. Pyhton
+1. Python
 2. Apache-kafka
 3. Docker
 
