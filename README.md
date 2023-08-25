@@ -25,7 +25,7 @@
 
 ### Subsystems of the platform
 1. Bootstrapper
-2. Scheduler + Validator Workflow
+2. Application Controller (Scheduler + Validator Workflow)
 3. Deployer
 4. Node Manager + Load Balancer
 5. Sensor Manager
