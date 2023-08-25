@@ -10,16 +10,14 @@
 2. Platform Admin
 3. Platform Developer
 
-
 ### How app developer will interact with platform 
 1. App developer needs to register on the platform first.
 2. Developer will download the contracts developer need to follow and formats in which they need to 
    upload the code base through platform UI.
 3. Developer will upload the code base on the platform website.
-4. Now, developer will go to the deaployment process page and schedule the deployment time of the
+4. Now, developer will go to the deaployment process page and schedule the  deployment time of the
    application.
 5. After deployment gets completed developer recieves the link to access the application.
-
 
 ## Detailed information about the platform
 
@@ -28,6 +26,10 @@
 2. Apache-kafka
 3. Docker
 
+### Database
+1. Mongodb
+2. Blob-storage
+3. Azure Container Registry
 
 ### Subsystems of the platform
 1. Bootstrapper
@@ -39,11 +41,14 @@
 7. Logger
 8. Platform UI
 
+### Other modules
+1. API Gateway
+2. LDAP Authentication Server 
+3. Logger UI
 
 ### Platform Architecture
 
 ![Platform Architecture](https://github.com/js141199/IOT-Platform/blob/main/Diagrams/Platform-Architecture.png)  
-
 
 ### Other Diagrams
 1. [Communication Model]
