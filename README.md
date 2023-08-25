@@ -39,11 +39,13 @@
 
 ### Other Diagrams
 1. Communication Model
-2. Application Model
-3. [Packaging Model] (https://github.com/js141199/IOT-Platform/blob/main/Diagrams/Packaging-Model.pdf)
+2. [Application Model] [application]
+3. [Packaging Model] [Packaging]
 4. Bootstrapper
 5. Application-Controller
 6. Deployer
 7. Sensor-Manager
 8. Node-Manager
 9. Monitoring And Fault Tolerance
+
+[Packaging]: https://github.com/js141199/IOT-Platform/blob/main/Diagrams/Packaging-Model.pdf
