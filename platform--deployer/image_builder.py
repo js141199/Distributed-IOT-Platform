@@ -88,6 +88,8 @@ def build_and_store_image(app_id, app_name, service_name):
         print(f'Image building and storing completed for app[{app_name}] service[{service_name}] !!')
         log.log_message('DEBUG', f'Image building and storing completed for app[{app_name}] service[{service_name}] !!')
 
+        # write code to remove zip file and its unzip version from the system
+
         return acr_image_path, contanarized_app_port
     
     else:

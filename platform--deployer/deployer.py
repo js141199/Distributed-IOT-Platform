@@ -44,7 +44,6 @@ def serve_run_request(app_id, app_name, service_name):
     log.log_message('DEBUG', f"Request came for deploying app[{app_name}] service[{service_name}]")
 
     # producing request to load-balancer for best node
-    # change these request formats ask to advait bhai
     message = {"message":"Node Required"} 
     kafka_talks.send_using_kafka("getNodeRequest",message)
 
@@ -59,7 +58,6 @@ def serve_run_request(app_id, app_name, service_name):
     print("Reply from load-balancer = ", node_info)
     log.log_message('DEBUG', f"Reply from loab-balancer = {node_info}")
 
-    # sid has to write query to fetch port and acr_image_path form mongo-db
     # first check that do we have image or not
     app_data, image_status = getAppData(app_id, service_name)
 
@@ -71,7 +69,7 @@ def serve_run_request(app_id, app_name, service_name):
         deployment_status, container_name, container_id = image_deployer.run_docker_image(global_variables.acr_info, node_info, contanarized_app_port, acr_image_path, app_name, service_name)
 
         if deployment_status == True:
-            # send success message to node-manager => jeet
+            # send success message to node-manager
             success_msg_node_manager =  {
                 "app_name" : app_name,
                 "service_name": service_name,
@@ -153,7 +151,7 @@ def serve_build_and_run_request(app_id, app_name, service_name):
         deployment_status, container_name, container_id  = image_deployer.run_docker_image(global_variables.acr_info, node_info, contanarized_app_port, acr_image_path, app_name, service_name)
 
         if deployment_status == True:
-            # send success message to node-manager => jeet
+            # send success message to node-manager
             success_msg_node_manager =  {
                 "app_name" : app_name,
                 "service_name": service_name,
