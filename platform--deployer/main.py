@@ -42,7 +42,7 @@ def initiating_deployer_process(scheduler_request):
 
         # start the container after doing proper validation of container existence
         elif schedule_type == 'start':
-            pass
+            service_status = deployer.serve_start_request(app_id, app_name, service_name)
 
         # start the container after doing proper validation of container existence
         elif schedule_type == 'stop':

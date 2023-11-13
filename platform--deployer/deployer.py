@@ -246,7 +246,7 @@ def serve_stop_request(app_id, app_name, service_name):
 
     return True
         
-def serve_start_request():
+def serve_start_request(app_id, app_name, service_name):
     pass
 
 
