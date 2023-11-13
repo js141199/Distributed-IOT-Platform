@@ -46,7 +46,7 @@ def initiating_deployer_process(scheduler_request):
 
         # start the container after doing proper validation of container existence
         elif schedule_type == 'stop':
-            service_status = deployer.serve_build_and_run_request(app_id, app_name, service_name)
+            service_status = deployer.serve_stop_request(app_id, app_name, service_name)
 
         if service_status == False:
             services_failed.append(service_name)
